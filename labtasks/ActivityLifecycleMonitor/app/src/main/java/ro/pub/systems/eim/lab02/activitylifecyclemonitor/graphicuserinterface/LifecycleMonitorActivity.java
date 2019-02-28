@@ -15,6 +15,7 @@ import ro.pub.systems.eim.lab02.activitylifecyclemonitor.general.Constants;
 import ro.pub.systems.eim.lab02.activitylifecyclemonitor.general.Utilities;
 
 public class LifecycleMonitorActivity extends AppCompatActivity {
+    public static final String TAG = "activitylifecyclemonitor";
 
     private ButtonClickListener buttonClickListener = new ButtonClickListener();
 
@@ -62,7 +63,54 @@ public class LifecycleMonitorActivity extends AppCompatActivity {
         Button cancelButton = (Button) findViewById(R.id.cancel_button);
         cancelButton.setOnClickListener(buttonClickListener);
 
-        Log.d(Constants.TAG, "onCreate() method was invoked without a previous state");
+        if (savedInstanceState == null) {
+            Log.d(TAG, "onCreate() method was invoked without a previous state");
+        } else {
+            Log.d(TAG, "onCreate() method was invoked with a previous state");
+        }
+    }
+
+    @Override
+    protected void onRestart() {
+        Log.d(TAG, "Calling onRestart");
+        super.onRestart();
+    }
+
+    protected void onStart() {
+        Log.d(TAG, "Calling onStart");
+        super.onStart();
+    }
+
+    protected void onResume() {
+        Log.d(TAG, "Calling onResume");
+        super.onResume();
+    }
+
+    protected void onPause() {
+        Log.d(TAG, "Calling onPause");
+        super.onPause();
+    }
+
+    protected void onStop() {
+        Log.d(TAG, "Calling onStop");
+        super.onStop();
+    }
+
+    protected void onDestroy() {
+        Log.d(TAG, "Calling onDestroy");
+        super.onDestroy();
+    }
+
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        Log.d(TAG, "Save something");
+        EditText usernameEditText = (EditText)findViewById(R.id.username_edit_text);
+        savedInstanceState.putString(Constants.USERNAME_EDIT_TEXT, usernameEditText.getText().toString());
+    }
+
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.d(TAG, "Restore something");
     }
 
 }
